@@ -1,0 +1,56 @@
+{
+    // Python settings for better IntelliSense
+    "python.defaultInterpreterPath": "./.venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.extraPaths": [
+        "./app",
+        "./routers"
+    ],
+    "python.analysis.include": [
+        "./app/**",
+        "./routers/**"
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.completeFunctionParens": true,
+    // Pylance (Python Language Server) settings
+    "python.languageServer": "Pylance",
+    "python.analysis.importFormat": "relative",
+    "python.analysis.stubPath": "./typings",
+    "python.analysis.diagnosticMode": "workspace",
+    // Auto-import and IntelliSense improvements
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "",
+            "depth": 2,
+            "includeAllSymbols": true
+        }
+    ],
+    // Editor settings for better coding experience
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "editor.suggest.showWords": false,
+    "editor.suggest.showSnippets": true,
+    "editor.suggest.localityBonus": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    // Python formatting
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    // File associations for better syntax highlighting
+    "files.associations": {
+        "*.py": "python"
+    },
+    // Workspace specific settings
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.analysis.persistAllChanges": true
+}
