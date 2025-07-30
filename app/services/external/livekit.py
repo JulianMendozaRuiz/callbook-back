@@ -172,5 +172,7 @@ def get_livekit_variables():
     return {
         "LIVEKIT_URL": LIVEKIT_URL,
         "LIVEKIT_API_KEY": LIVEKIT_API_KEY,
-        "LIVEKIT_API_SECRET": LIVEKIT_API_SECRET,
+        "LIVEKIT_API_SECRET": "***"
+        if LIVEKIT_API_SECRET != "secret"
+        else LIVEKIT_API_SECRET,
     }
