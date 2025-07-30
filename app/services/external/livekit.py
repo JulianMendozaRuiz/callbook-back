@@ -2,10 +2,14 @@ import os
 import random
 import string
 import uuid
+from dotenv import load_dotenv
 
 from livekit import api
 
 from app.models.videocall import TokenResult
+
+# Load environment variables from .env file
+load_dotenv()
 
 LIVEKIT_URL = os.environ.get("LIVEKIT_URL", "ws://localhost:7880")
 LIVEKIT_API_KEY = os.environ.get("LIVEKIT_API_KEY", "devkey")
