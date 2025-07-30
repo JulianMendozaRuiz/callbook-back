@@ -1,0 +1,43 @@
+name: Deploy Backend to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ec2-deploy
+
+    steps:
+      # Step 1 - Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2 - Setup SSH Key from base64 (Linux uses -d)
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          # Verify key format
+          ssh-keygen -l -f ~/.ssh/id_rsa
+
+      # Step 3 - Test SSH Connection
+      - name: Test SSH Connection
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "echo 'SSH connection successful'"
+
+      # Step 4 - Deploy to EC2 via SSH
+      - name: Deploy to EC2 via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /apps/callbook-proxy/callbook-back
+            git fetch origin
+            git checkout main
+            git reset --hard origin/main
+            cd ..
+            docker compose build --no-cache backend
+            docker compose up -d backend
+          EOF
