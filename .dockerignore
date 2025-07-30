@@ -9,7 +9,7 @@
 **/.venv
 **/.classpath
 **/.dockerignore
-**/.env
+# **/.env  # Commented out to allow .env files for environment variables
 **/.git
 **/.gitignore
 **/.project
