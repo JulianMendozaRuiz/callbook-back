@@ -31,13 +31,26 @@ jobs:
 
       # Step 4 - Deploy to EC2 via SSH
       - name: Deploy to EC2 via SSH
+        env:
+          # Add your environment variables here from GitHub secrets
+          LIVEKIT_URL: ${{ secrets.LIVEKIT_URL }}
+          LIVEKIT_API_KEY: ${{ secrets.LIVEKIT_API_KEY }}
+          LIVEKIT_API_SECRET: ${{ secrets.LIVEKIT_API_SECRET }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
             cd /apps/callbook-proxy/callbook-back
             git fetch origin
             git checkout main
             git reset --hard origin/main
-            cd ..
-            docker compose build --no-cache backend
-            docker compose up -d backend
+            
+            # Create or update .env file with environment variables
+            cat > .env << 'ENVEOF'
+          LIVEKIT_URL=$LIVEKIT_URL
+          LIVEKIT_API_KEY=$LIVEKIT_API_KEY
+          LIVEKIT_API_SECRET=$LIVEKIT_API_SECRET
+          ENVEOF
+            
+            # Build and deploy with correct service name
+            docker compose build --no-cache server
+            docker compose up -d server
           EOF

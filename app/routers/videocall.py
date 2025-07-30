@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.models.videocall import VideoCallRequest, VideoCallResponse
-from app.services.external.livekit import create_video_call
+from app.services.external.livekit import create_video_call, get_livekit_variables
 
 router = APIRouter(prefix="/videocall", tags=["videocall"])
 
@@ -34,3 +34,11 @@ def join_call(request: VideoCallRequest):
         identity="",
         username="",
     )
+
+
+@router.get("/variables", response_model=dict)
+def get_variables():
+    """
+    Get environment variables related to video calls
+    """
+    return get_livekit_variables()

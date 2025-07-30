@@ -41,3 +41,11 @@ def create_video_call(
     identity: str | None = None,
 ) -> TokenResult:
     return create_token(name=username, identity=identity)
+
+
+def get_livekit_variables() -> dict:
+    return {
+        "LIVEKIT_URL": LIVEKIT_URL,
+        "LIVEKIT_API_KEY": LIVEKIT_API_KEY,
+        "LIVEKIT_API_SECRET": LIVEKIT_API_SECRET,
+    }
