@@ -50,7 +50,10 @@ jobs:
           LIVEKIT_API_SECRET=$LIVEKIT_API_SECRET
           ENVEOF
             
+            # Stop existing containers first
+            docker compose down
+            
             # Build and deploy with correct service name
-            docker compose build --no-cache server
-            docker compose up -d server
+            docker compose build --no-cache backend
+            docker compose up -d backend
           EOF
