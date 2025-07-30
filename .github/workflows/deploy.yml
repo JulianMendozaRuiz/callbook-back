@@ -42,13 +42,14 @@ jobs:
             git checkout main
             git reset --hard origin/main
             
-            # Create .env file in the callbook-back directory where compose.yaml is located
+            # Create .env file in the backend directory
             cat > .env << 'ENVEOF'
           LIVEKIT_URL=$LIVEKIT_URL
           LIVEKIT_API_KEY=$LIVEKIT_API_KEY
           LIVEKIT_API_SECRET=$LIVEKIT_API_SECRET
           ENVEOF
             
+            cd ..
             docker compose build --no-cache backend
             docker compose up -d backend
           EOF

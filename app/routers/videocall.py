@@ -36,7 +36,7 @@ def join_call(request: VideoCallRequest):
     )
 
 
-@router.get("/variables", response_model=dict)
+@router.get("/variables")
 def get_variables():
     """
     Get environment variables related to video calls
