@@ -32,7 +32,7 @@ jobs:
       # Step 4 - Deploy to EC2 via SSH
       - name: Deploy to EC2 via SSH
         env:
-          LIVEKIT_URL: ${{ secrets.LIVEKIT_URL }}
+          LIVEKIT_URL: ${{ vars.LIVEKIT_URL }}
           LIVEKIT_API_KEY: ${{ secrets.LIVEKIT_API_KEY }}
           LIVEKIT_API_SECRET: ${{ secrets.LIVEKIT_API_SECRET }}
         run: |
