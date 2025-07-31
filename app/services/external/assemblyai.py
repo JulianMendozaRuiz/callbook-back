@@ -5,6 +5,8 @@ import assemblyai as aai
 import requests
 from dotenv import load_dotenv
 
+from ...models.transcription import AssemblyAIResponse
+
 load_dotenv()
 
 ASSEMBLYAI_API_KEY = os.environ.get("ASSEMBLYAI_API_KEY", "your_assemblyai_api_key")
@@ -25,7 +27,9 @@ class AssemblyAIService:
         # Configure the API key for regular transcription
         aai.settings.api_key = ASSEMBLYAI_API_KEY
 
-    def generate_realtime_token(self, expires_in_seconds: int = 600) -> str:
+    def generate_realtime_token(
+        self, expires_in_seconds: int = 60
+    ) -> AssemblyAIResponse:
         """
         Generate a temporary token for real-time transcription using direct API call
 
@@ -48,7 +52,10 @@ class AssemblyAIService:
             response.raise_for_status()
 
             token_data = response.json()
-            return token_data.get("token", "")
+            return AssemblyAIResponse(
+                token=token_data.get("token", ""),
+                expires_in=token_data.get("expires_in", expires_in_seconds),
+            )
 
         except Exception as e:
             raise Exception(f"Failed to generate AssemblyAI token: {str(e)}")
