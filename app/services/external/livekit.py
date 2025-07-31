@@ -85,10 +85,6 @@ class LiveKitService:
             del self._rooms[room_id]
 
 
-# Global singleton instance
-livekit_service = LiveKitService()
-
-
 def generate_room_id(length: int = 6) -> str:
     return "".join(random.choices(string.ascii_uppercase + string.digits, k=length))
 
@@ -176,3 +172,7 @@ def get_livekit_variables():
         if LIVEKIT_API_SECRET != "secret"
         else LIVEKIT_API_SECRET,
     }
+
+
+# Global singleton instance
+livekit_service = LiveKitService()

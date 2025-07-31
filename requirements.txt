@@ -2,3 +2,5 @@ fastapi[standard]
 uvicorn
 python-dotenv
 livekit-api
+assemblyai
+requests
