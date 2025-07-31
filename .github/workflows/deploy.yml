@@ -48,6 +48,7 @@ jobs:
           LIVEKIT_URL=$LIVEKIT_URL
           LIVEKIT_API_KEY=$LIVEKIT_API_KEY
           LIVEKIT_API_SECRET=$LIVEKIT_API_SECRET
+          ASSEMBLYAI_API_KEY=$ASSEMBLYAI_API_KEY
           ENVEOF
             
             cd ..
