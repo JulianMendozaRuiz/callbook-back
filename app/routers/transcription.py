@@ -23,3 +23,17 @@ async def create_token():
         raise HTTPException(
             status_code=500, detail=f"Failed to generate token: {str(e)}"
         )
+
+
+@router.get("/variables", response_model=dict)
+def get_variables():
+    """
+    Get AssemblyAI configuration variables
+    This endpoint returns the API key and other settings used by the service.
+    """
+    try:
+        return assemblyai_service.get_assemblyai_variables()
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Failed to retrieve variables: {str(e)}"
+        )

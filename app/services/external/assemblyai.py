@@ -53,6 +53,17 @@ class AssemblyAIService:
         except Exception as e:
             raise Exception(f"Failed to generate AssemblyAI token: {str(e)}")
 
+    def get_assemblyai_variables(self) -> dict:
+        """
+        Get AssemblyAI configuration variables
+
+        Returns:
+            dict: Dictionary containing AssemblyAI configuration variables
+        """
+        return {
+            "ASSEMBLYAI_API_KEY": ASSEMBLYAI_API_KEY,
+        }
+
 
 # Global singleton instance
 assemblyai_service = AssemblyAIService()
