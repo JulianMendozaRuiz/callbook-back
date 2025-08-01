@@ -3,6 +3,7 @@ from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers.transcription import router as transcription_router
+from app.routers.translation import router as translation_router
 from app.routers.videocall import router as videocall_router
 
 load_dotenv()
@@ -15,7 +16,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:4200",
         "http://127.0.0.1:4200",
-    ],  # Add your frontend URL
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -23,6 +24,7 @@ app.add_middleware(
 
 app.include_router(videocall_router)
 app.include_router(transcription_router)
+app.include_router(translation_router)
 
 
 @app.get("/")
